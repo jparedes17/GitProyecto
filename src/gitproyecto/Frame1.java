@@ -59,7 +59,24 @@ public class Frame1 extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Numero 2:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, -1, -1));
+
+        txtNumero2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNumero2ActionPerformed(evt);
+            }
+        });
+        txtNumero2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumero2KeyTyped(evt);
+            }
+        });
         jPanel1.add(txtNumero2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, 70, -1));
+
+        txtNumero1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumero1KeyTyped(evt);
+            }
+        });
         jPanel1.add(txtNumero1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 80, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -117,11 +134,19 @@ public class Frame1 extends javax.swing.JFrame {
             txtNumero2.requestFocusInWindow();
         }
         else {
-      
+     
         operacion= cmbOperacion.getSelectedIndex();        
         n1= Double.parseDouble(txtNumero1.getText());
         n2= Double.parseDouble(txtNumero2.getText());
+        
+        if (operacion ==  3 && n2 ==0) 
+     {
+         JOptionPane.showMessageDialog(this, "No digite cero en el segundo numero", "Error", JOptionPane.ERROR_MESSAGE);
+            txtNumero2.requestFocusInWindow();
+            txtNumero2.selectAll();
+     }
      
+     else {
         switch(operacion)
         {
             case 0:
@@ -140,6 +165,7 @@ public class Frame1 extends javax.swing.JFrame {
         res=String.valueOf(resultado);
         jLabel5.setText(""+res);
         }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -151,6 +177,33 @@ public class Frame1 extends javax.swing.JFrame {
         txtNumero1.requestFocusInWindow();
         cmbOperacion.setSelectedIndex(0);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtNumero1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumero1KeyTyped
+        // TODO add your handling code here:
+        char c=evt.getKeyChar(); 
+          if(!Character.isDigit(c)) { 
+              getToolkit().beep(); 
+              evt.consume(); 
+               
+          }
+    }//GEN-LAST:event_txtNumero1KeyTyped
+
+    private void txtNumero2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumero2ActionPerformed
+        // TODO add your handling code here:
+        
+     
+          
+    }//GEN-LAST:event_txtNumero2ActionPerformed
+
+    private void txtNumero2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumero2KeyTyped
+        // TODO add your handling code here:
+        char c=evt.getKeyChar(); 
+          if(!Character.isDigit(c))
+          {  
+              getToolkit().beep(); 
+              evt.consume(); 
+          }
+    }//GEN-LAST:event_txtNumero2KeyTyped
 
     /**
      * @param args the command line arguments
