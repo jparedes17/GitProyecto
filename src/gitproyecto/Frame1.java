@@ -40,6 +40,8 @@ public class Frame1 extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        cmbOperacion = new javax.swing.JComboBox();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -62,10 +64,10 @@ public class Frame1 extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Resultado:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 60, 30));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, 60, 30));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Ejecutar");
@@ -85,6 +87,13 @@ public class Frame1 extends javax.swing.JFrame {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, -1, -1));
 
+        cmbOperacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Suma", "Resta", "Multiplicacion", "Division" }));
+        jPanel1.add(cmbOperacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setText("Operacion:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 580, 390));
 
         pack();
@@ -92,17 +101,45 @@ public class Frame1 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int numero1;
-        int numero2;
-        int suma;
-        String resultado;
+        double n1,n2;
+        int operacion;
+        double resultado = 0;
+        String res;
         
-        numero1= Integer.parseInt(txtNumero1.getText());
-        numero2= Integer.parseInt(txtNumero2.getText());
-        suma= numero1+numero2;
-        resultado=String.valueOf(suma);
-        jLabel5.setText(""+resultado);
-        
+        if (txtNumero1.getText().trim().isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "Digite el  Numero 1", "Error", JOptionPane.ERROR_MESSAGE);
+            txtNumero1.requestFocusInWindow();
+        }
+        else if(txtNumero2.getText().trim().isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "Digite el Numero 2", "Error", JOptionPane.ERROR_MESSAGE);
+            txtNumero2.requestFocusInWindow();
+        }
+        else {
+      
+        operacion= cmbOperacion.getSelectedIndex();        
+        n1= Double.parseDouble(txtNumero1.getText());
+        n2= Double.parseDouble(txtNumero2.getText());
+     
+        switch(operacion)
+        {
+            case 0:
+                resultado= n1+n2;
+                break;
+            case 1:
+                resultado = n1-n2;
+                break;
+            case 2:
+                resultado = n1 * n2;
+                break;
+                case 3:
+                    resultado = n1/n2;
+                    break;
+        }
+        res=String.valueOf(resultado);
+        jLabel5.setText(""+res);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -111,7 +148,8 @@ public class Frame1 extends javax.swing.JFrame {
         txtNumero2.setText("");
         jLabel5.setText("");
         
-        txtNumero1.requestFocus();
+        txtNumero1.requestFocusInWindow();
+        cmbOperacion.setSelectedIndex(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -150,6 +188,7 @@ public class Frame1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox cmbOperacion;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -157,6 +196,7 @@ public class Frame1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtNumero1;
     private javax.swing.JTextField txtNumero2;
